@@ -1,0 +1,65 @@
+ <!DOCTYPE html>
+<html>
+<head>
+  <title>The Box Game</title>
+  <center><h1>moving box</h1></center>
+  <style type="text/css">
+    canvas {
+      border: solid 1px #000;
+      
+    }
+  </style>
+</head>
+  <center><canvas id="canvas" width="600" height="400"></canvas></center>
+  <script type="text/javascript">
+    //Create the Canvas
+    var canvas = document.getElementById("canvas");
+    var context = canvas.getContext("2d");
+    //Create the Player Box Object
+    var box = {
+      x: 300,
+      y: 200,
+      speed: 25,
+      size: 20,
+      color: "blue"
+    }
+        var box2 = {
+      x: 300,
+      y: 200,
+      speed: 25,
+      size: 20,
+      color: "red"
+    }
+
+  function drawBox(){
+      context.fillStyle = box.color;
+      context.fillRect(box.x, box.y, box.size, box.size);
+    }
+    function drawBox2(){
+      context.fillStyle = box2.color;
+      context.fillRect(box2.x, box2.y, box2.size, box2.size);
+    }
+function moveBox(){
+      box.x += box.speed;
+  if(box.x >= (canvas.width-box.size)) {box.speed=-box.speed;}
+  if(box.x < 0) {box.speed = -box.speed}
+}
+
+  function moveBox2(){
+      box2.y -= box2.speed;
+  if(box2.y >= (canvas.height-box2.size)) {box2.speed=-box2.speed;}
+  if(box2.y < 1) {box2.speed = -box2.speed}
+  }
+
+  function playGame(){
+      context.clearRect(0,0,canvas.width,canvas.height);
+      drawBox()
+      drawBox2()
+      moveBox()
+      moveBox2()
+      requestAnimationFrame(playGame);
+    }
+    playGame();
+    </script>
+</body>
+</html>
